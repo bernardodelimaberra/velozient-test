@@ -17,7 +17,12 @@ drone is a constant and does not vary between drones. The maximum number of dron
 
 ## Solution
 
+### Dependencies:
 
+- Java 20
+- Gradle 8.0.2
+- JUnit Jupiter 5.9.1
+- Visual Studio Code Version: 1.78.2
 
 ### Build project:
 
