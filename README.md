@@ -17,6 +17,14 @@ drone is a constant and does not vary between drones. The maximum number of dron
 
 ## Solution
 
+To optimize the algorithm and ensure efficient package deliveries, the drones and locations are sorted in descending order based on their respective capacities and package weights. This ensures that drones with higher capacity are assigned to handle larger packages.
+
+To balance the workload among the drones and avoid overburdening a single drone, the locations are assigned to drones in a round-robin fashion. This means that after each assignment, the next drone in line is selected, cyclically.
+
+The assignment of locations to drones is done recursively until the full capacity of each drone is reached or no more locations are available. This recursive approach ensures efficient utilization of drone capacity by trying to accommodate as many packages as possible on each trip.
+
+These improvements aim to optimize the delivery process, minimize the number of trips, and distribute the workload evenly among the drones, leading to an efficient and balanced drone delivery service.
+
 ### Dependencies:
 
 - Java 20
