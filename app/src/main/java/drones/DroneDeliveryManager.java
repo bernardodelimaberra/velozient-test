@@ -9,8 +9,9 @@ public class DroneDeliveryManager {
         List<DroneRoutePlanner> routes = new ArrayList<>();
         List<Location> locationsLeft = new ArrayList<>(locations);
 
-        int count = 0;
-        while (!drones.isEmpty() && !locationsLeft.isEmpty() && count <= drones.size()) {
+        int emptyTripCount = 0;
+        while (!drones.isEmpty() && !locationsLeft.isEmpty() && emptyTripCount <= drones.size()) {
+            int locationsLeftInitial = locationsLeft.size();
             final List<DroneRoutePlanner> finalRoutes = routes;
             routes = drones.stream()
                     .map(drone -> {
@@ -27,11 +28,15 @@ public class DroneDeliveryManager {
                         return new DroneRoutePlanner(drone, tripsForDrone);
                     })
                     .collect(Collectors.toList());
-            count++;
+            emptyTripCount++;
+            if (locationsLeft.size() < locationsLeftInitial) {
+                emptyTripCount = 0;
+            }
         }
 
-        if (count > drones.size()) {
-            throw new Exception("There are no drones available with sufficient capacity to pick up the remaining locations.");
+        if (emptyTripCount > drones.size()) {
+            throw new Exception(
+                    "There are no drones available with sufficient capacity to pick up the remaining locations.");
         }
         return routes;
     }
